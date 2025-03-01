@@ -3,11 +3,14 @@ using UnityEngine;
 public class Phase3Trigger : MonoBehaviour
 {
     public GameObject[] itemsToToggle;
+    private bool hasTriggered = false; 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!hasTriggered && other.CompareTag("Player")) 
         {
+            hasTriggered = true; 
+
             foreach (GameObject item in itemsToToggle)
             {
                 if (item != null)
@@ -18,4 +21,5 @@ public class Phase3Trigger : MonoBehaviour
         }
     }
 }
+
 
