@@ -94,7 +94,7 @@ public class ObjectPickUpDrop : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Ensure the object stays as a physical collider after landing on the floor to prevent it falling through the floor
+        // makes sure the object stays as a physical collider after landing on the floor to prevent it falling through the floor
         if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             if (objectType == ObjectType.Light)
