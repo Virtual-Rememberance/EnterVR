@@ -3,8 +3,12 @@ using UnityEngine;
 public class OpenDoor : MonoBehaviour
 {
     private GameObject doorObject;
+
     private Animator Left_Door;
     private Animator Right_Door;
+
+    private AudioSource Open_DoorSFX;
+    private AudioSource Close_DoorSFX;
 
     private void OnTriggerEnter(Collider door)
     {
@@ -13,7 +17,11 @@ public class OpenDoor : MonoBehaviour
             Debug.Log("Player Entered");
 
             doorObject = door.gameObject;
+
             openDoor();
+            AudioGrabber();
+
+            Open_DoorSFX.Play();
         }
     }
 
@@ -22,7 +30,11 @@ public class OpenDoor : MonoBehaviour
         if (door.tag == "Door")
         {
             Debug.Log("Player Exited");
+
             closeDoor();
+            AudioGrabber();
+
+            Close_DoorSFX.Play();
         }
     }
 
@@ -33,6 +45,8 @@ public class OpenDoor : MonoBehaviour
 
         Left_Door.SetBool("playerClose", true);
         Right_Door.SetBool("playerClose", true);
+
+        
     }
 
     private void closeDoor()
@@ -42,6 +56,14 @@ public class OpenDoor : MonoBehaviour
 
         Left_Door.SetBool("playerClose", false);
         Right_Door.SetBool("playerClose", false);
+
+        
+    }
+
+    private void AudioGrabber()
+    {
+        Open_DoorSFX = doorObject.transform.GetChild(2).GetChild(0).GetComponent<AudioSource>();
+        Close_DoorSFX = doorObject.transform.GetChild(2).GetChild(1).GetComponent<AudioSource>();
     }
 }
 
