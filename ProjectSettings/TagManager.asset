@@ -8,6 +8,7 @@ TagManager:
   - Key
   - Hands
   - Door
+  - Grapple
   layers:
   - Default
   - TransparentFX
