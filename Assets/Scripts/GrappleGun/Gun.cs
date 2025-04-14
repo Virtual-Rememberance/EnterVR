@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField]
+   
     public GameObject plunger;
-
-    public float plungerSpeed;
+    public GameObject player;
 
     [SerializeField] Transform barrel;
+
+    public float plungerSpeed;
 
     Transform plungerPos;
 
@@ -15,16 +16,23 @@ public class Gun : MonoBehaviour
 
     Plunger plungerScript;
 
+    LineRenderer rope;
+
+
+
     public bool hasBeenShot { get; set; }
 
     public void Start()
     {
         plungerPos = plunger.transform;
         plungerRB = plunger.GetComponent<Rigidbody>();
-        plungerScript = gameObject.GetComponent<Plunger>();
+        plungerScript = plunger.GetComponent<Plunger>();
+
+        rope = GetComponent<LineRenderer>();
+        rope.positionCount = 2;
     }
 
-    public void Update()
+   public void Update()
     {
         if (!hasBeenShot)
         {
@@ -32,13 +40,24 @@ public class Gun : MonoBehaviour
             plungerPos.forward = barrel.forward;
         }
 
+        if (hasBeenShot)
+        {
+            rope.enabled = true;
+            rope.SetPosition(0, barrel.position);
+            rope.SetPosition(1, plunger.transform.position);
+        }
+        else
+        {
+            rope.enabled = false;
+        } 
+
     }
 
     public void Fire()
    {
         hasBeenShot = true;
         plungerPos.position = barrel.position;
-        plungerRB.angularVelocity = barrel.forward * plungerSpeed;
+        plungerRB.linearVelocity = barrel.forward * plungerSpeed;
 
    }
 
