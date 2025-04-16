@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Plunger : MonoBehaviour
 {
+    public bool isGrappling = false;
+
     private void OnCollisionEnter(Collision other)
     {
        if (other.gameObject.CompareTag("Grapple"))
@@ -15,7 +17,11 @@ public class Plunger : MonoBehaviour
          
          FixedJoint joint = gameObject.AddComponent<FixedJoint>();
          joint.connectedBody = otherRB;
-
+         isGrappling = true;  
+       }
+       else
+       {
+            isGrappling = false; 
        }
     }
 

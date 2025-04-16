@@ -1,10 +1,17 @@
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class Gun : MonoBehaviour
 {
-   
+
+    public Transform playerCam;
+    public CharacterController charController;
+    public float pullSpeed = 5f;
+
     public GameObject plunger;
-    public GameObject player;
+
+    private bool isPulling = false;
+    private Vector3 pullLocation;
 
     [SerializeField] Transform barrel;
 
@@ -51,9 +58,32 @@ public class Gun : MonoBehaviour
             rope.enabled = false;
         } 
 
+
+        if (isPulling)
+        {
+            Vector3 direction = (pullLocation - playerCam.position);
+            float distance = direction.magnitude;
+
+            if (distance > 0.2f)
+            {
+                direction.Normalize();
+                charController.Move(direction * pullSpeed * Time.deltaTime);
+                
+            }
+            else
+            {
+                charController.Move(direction);
+                isPulling = false;
+
+                plunger.transform.position = barrel.position;
+                plunger.transform.forward = barrel.forward;
+            }
+
+            
+        }
     }
 
-    public void Fire()
+   public void Fire()
    {
         hasBeenShot = true;
         plungerPos.position = barrel.position;
@@ -65,6 +95,18 @@ public class Gun : MonoBehaviour
    {
         hasBeenShot = false;
         plungerScript.DestroyJoint();
-
+        
+        if (plungerScript.isGrappling == true)
+        {
+            PullPlayer();
+        }
    } 
+
+    public void PullPlayer()
+    {
+        plungerRB.linearVelocity = Vector3.zero;
+
+        pullLocation = plunger.transform.position;
+        isPulling = true;
+    }
 }
