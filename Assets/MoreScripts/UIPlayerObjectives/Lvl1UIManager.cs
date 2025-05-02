@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -9,12 +10,8 @@ public class Lvl1UIManager : MonoBehaviour
     public TextMeshProUGUI finalObjvText;
     void Awake()
     {
-        //play intro audio, when this audio is over turn on Player UI
 
-        playerCanvas = GetComponent<Canvas>();
-
-        playerCanvas.enabled = true;
-
+        BringUpUI();
         
     }
 
@@ -32,5 +29,9 @@ public class Lvl1UIManager : MonoBehaviour
     }
 
    
-   
+   public void BringUpUI()
+   {
+        playerCanvas = GetComponent<Canvas>();
+        playerCanvas.enabled = true;
+   }
 }
