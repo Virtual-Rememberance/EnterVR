@@ -111,5 +111,6 @@ public class Gun : MonoBehaviour
         isPulling = true;
         await Task.Delay(5000);
         isPulling = false;
+        hasBeenShot = false;
     }
 }

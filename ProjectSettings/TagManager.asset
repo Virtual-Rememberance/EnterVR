@@ -8,6 +8,13 @@ TagManager:
   - Key
   - Hands
   - Door
+  - PinkBook
+  - GreenBook
+  - BlueBook
+  - YellowBook
+  - RedBook
+  - Camera
+  - Grapple
   layers:
   - Default
   - TransparentFX
