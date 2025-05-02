@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class EndGame : MonoBehaviour
 {
@@ -10,26 +9,17 @@ public class EndGame : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (buttonColl != null)
+
+        if (other.CompareTag("Hands"))
         {
-            Debug.Log(" Button collider on!");
 
-            if (other.CompareTag("Hands"))
-            {
+            Debug.Log("Hands has entered me");
+            endPanel.SetActive(true);
+            nopeWall.SetActive(true);
+            buttonColl.enabled = false;
 
-                Debug.Log("Hands has entered me");
-                endPanel.SetActive(true);
-                nopeWall.SetActive(true);
-                buttonColl.enabled = false;
-
-            }
-            else
-            {
-                Debug.Log(" Those are not hands!!! ");
-            }
         }
-
-       
+        
 
     }
 }
