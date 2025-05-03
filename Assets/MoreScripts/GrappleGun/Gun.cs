@@ -109,7 +109,7 @@ public class Gun : MonoBehaviour
 
         pullLocation = plunger.transform.position;
         isPulling = true;
-        await Task.Delay(5000);
+        await Task.Delay(3000);
         isPulling = false;
         hasBeenShot = false;
     }
